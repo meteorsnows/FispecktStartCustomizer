@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:FispecktStartCustomizer"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        Title="MainWindow" Height="300" Width="300" Closing="AcrylicWindow_Closing">
     <Grid fw:PointerTracker.Enabled="True" Background="#70000000">
-        <Button Content="хачю арбуз" HorizontalAlignment="Left" Margin="21,72,0,91" Width="243"
+        <Button Content="Start handler" HorizontalAlignment="Left" Margin="20,63,0,100" Width="243"
                 Style="{StaticResource ButtonRevealStyle}" Click="Button_Click"/>
 
     </Grid>
