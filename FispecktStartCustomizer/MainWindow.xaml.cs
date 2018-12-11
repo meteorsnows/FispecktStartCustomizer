@@ -15,6 +15,7 @@ namespace FispecktStartCustomizer
     public partial class MainWindow
     {
 
+
         /***********************************************************************Mouse hook for start button***********************************************************************/
 
         //Variables for mousehook
@@ -91,7 +92,6 @@ namespace FispecktStartCustomizer
 
         private static IntPtr keyboardCallback(int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam)
         {
-            private static IntPtr keyboardCallback(int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam;
             if ((KeyMessages)lParam.vkCode == KeyMessages.VK_LWIN | (KeyMessages)lParam.vkCode == KeyMessages.VK_RWIN)
             {
                 Console.WriteLine("Start pressed");
@@ -105,6 +105,7 @@ namespace FispecktStartCustomizer
 
         /***********************************************************************Implementing functions for hoooks***********************************************************************/
 
+        IntPtr hwndButton;
 
         delegate IntPtr HookProc(int code, IntPtr wParam, KBDLLHOOKSTRUCT lParam);
 
@@ -187,7 +188,7 @@ namespace FispecktStartCustomizer
             IntPtr TaskBar = FindWindow("Shell_TrayWnd", null); // Connect to taskbar
             if (TaskBar != (IntPtr)0)
             {
-                IntPtr hwndButton = FindWindowEx(TaskBar, IntPtr.Zero, "Start", null); // Connect to start menu tooltip
+                hwndButton = FindWindowEx(TaskBar, IntPtr.Zero, "Start", null); // Connect to start menu tooltip
                 if (hwndButton != (IntPtr)0)
                 {
                     EnableWindow(hwndButton, false);
@@ -208,6 +209,7 @@ namespace FispecktStartCustomizer
         private void AcrylicWindow_Closing(object sender, CancelEventArgs e)
         {
             UnHook(); // Unhook on window close
+            EnableWindow(hwnd)
         }
     }
 }
