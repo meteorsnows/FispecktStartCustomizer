@@ -91,15 +91,13 @@ namespace FispecktStartCustomizer
 
         private static IntPtr keyboardCallback(int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam)
         {
-            if(nCode >= 0 && (KeyMessages)wParam == KeyMessages.WM_KEYUP)
+            private static IntPtr keyboardCallback(int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam;
+            if ((KeyMessages)lParam.vkCode == KeyMessages.VK_LWIN | (KeyMessages)lParam.vkCode == KeyMessages.VK_RWIN)
             {
-                if((KeyMessages)lParam.vkCode == KeyMessages.VK_LWIN | (KeyMessages)lParam.vkCode == KeyMessages.VK_RWIN)
-                {
-                    Console.WriteLine("Start pressed");
-
-                }
+                Console.WriteLine("Start pressed");
+                return (IntPtr)1;
             }
-            return (IntPtr)1;
+            return CallNextHookEx(keyHookId, nCode, wParam, lParam);
         }
 
         /***********************************************************************End of keyboard hook***********************************************************************/
