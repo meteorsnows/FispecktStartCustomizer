@@ -22,7 +22,7 @@ namespace FispecktStartCustomizer
 
         private static IntPtr mHookId = IntPtr.Zero;
 
-        private static HookProc mouseProc = mouseCallback;
+        private static FunctionsImplementations.HookProc mouseProc = mouseCallback;
 
         private static Win32Point curPos = new Win32Point();
         private static Rect buttonRect = new Rect();
@@ -41,16 +41,16 @@ namespace FispecktStartCustomizer
         };
         private enum MouseMessages { WM_LBUTTONUP = 0x0202 }
 
-        private static IntPtr HookMouse(HookProc proc)
+        private static IntPtr HookMouse(FunctionsImplementations.HookProc proc)
         {
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
-                return SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+                return FunctionsImplementations.SetWindowsHookEx(WH_MOUSE_LL, proc, FunctionsImplementations.GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
-        private static IntPtr mouseCallback(int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam)
+        private static IntPtr mouseCallback(int nCode, IntPtr wParam, FunctionsImplementations.KBDLLHOOKSTRUCT lParam)
         {
             if (nCode >= 0 && (MouseMessages)wParam == MouseMessages.WM_LBUTTONUP)
             {
@@ -65,7 +65,7 @@ namespace FispecktStartCustomizer
                 }
 
             }
-            return CallNextHookEx(mHookId, nCode, wParam, lParam);
+            return FunctionsImplementations.CallNextHookEx(mHookId, nCode, wParam, lParam);
         }
 
         /***********************************************************************End of mouse hook***********************************************************************/
@@ -76,78 +76,33 @@ namespace FispecktStartCustomizer
         private static IntPtr keyHookId = IntPtr.Zero;
 
         private const int WH_KEYBOARD_LL = 13; // Low-level keyboard hook number
-        private static HookProc keyboardProc = keyboardCallback;
+        private static FunctionsImplementations.HookProc keyboardProc = keyboardCallback;
 
         private enum KeyMessages { WM_KEYUP = 0x0101, VK_LWIN=0x5B, VK_RWIN=0x5C }
 
-        private static IntPtr HookKeyboard(HookProc proc)
+        private static IntPtr HookKeyboard(FunctionsImplementations.HookProc proc)
         {
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
-                return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+                return FunctionsImplementations.SetWindowsHookEx(WH_KEYBOARD_LL, proc, FunctionsImplementations.GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
 
-        private static IntPtr keyboardCallback(int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam)
+        private static IntPtr keyboardCallback(int nCode, IntPtr wParam, FunctionsImplementations.KBDLLHOOKSTRUCT lParam)
         {
             if ((KeyMessages)lParam.vkCode == KeyMessages.VK_LWIN | (KeyMessages)lParam.vkCode == KeyMessages.VK_RWIN)
             {
                 Console.WriteLine("Start pressed");
                 return (IntPtr)1;
             }
-            return CallNextHookEx(keyHookId, nCode, wParam, lParam);
+            return FunctionsImplementations.CallNextHookEx(keyHookId, nCode, wParam, lParam);
         }
 
         /***********************************************************************End of keyboard hook***********************************************************************/
 
-
-        /***********************************************************************Implementing functions for hoooks***********************************************************************/
-
         IntPtr hwndButton;
-
-        delegate IntPtr HookProc(int code, IntPtr wParam, KBDLLHOOKSTRUCT lParam);
-
-        [StructLayout(LayoutKind.Sequential)]
-        public class KBDLLHOOKSTRUCT
-        {
-            public uint vkCode;
-            public uint scanCode;
-            public KBDLLHOOKSTRUCTFlags flags;
-            public uint time;
-            public UIntPtr dwExtraInfo;
-        }
-
-        [Flags]
-        public enum KBDLLHOOKSTRUCTFlags : uint
-        {
-            LLKHF_EXTENDED = 0x01,
-            LLKHF_INJECTED = 0x10,
-            LLKHF_ALTDOWN = 0x20,
-            LLKHF_UP = 0x80,
-        }
-
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int hookId, HookProc lpfn, IntPtr hMod, uint dwThreadId);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, KBDLLHOOKSTRUCT lParam);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool EnableWindow(IntPtr hWnd, bool bEnable);
-
-        /***********************************************************************End of implementing functions***********************************************************************/
-
         /***********************************************************************Hook control functions***********************************************************************/
         public void Hook()
         {
@@ -157,8 +112,8 @@ namespace FispecktStartCustomizer
 
         private void UnHook()
         {
-            UnhookWindowsHookEx(mHookId);
-            UnhookWindowsHookEx(keyHookId);
+            FunctionsImplementations.UnhookWindowsHookEx(mHookId);
+            FunctionsImplementations.UnhookWindowsHookEx(keyHookId);
         }
 
         //Import some functions for start menu tooltip 
@@ -191,7 +146,7 @@ namespace FispecktStartCustomizer
                 hwndButton = FindWindowEx(TaskBar, IntPtr.Zero, "Start", null); // Connect to start menu tooltip
                 if (hwndButton != (IntPtr)0)
                 {
-                    EnableWindow(hwndButton, false);
+                    FunctionsImplementations.EnableWindow(hwndButton, false);
                     GetWindowRect(hwndButton, ref buttonRect);
                     Hook();
                 }
@@ -209,7 +164,7 @@ namespace FispecktStartCustomizer
         private void AcrylicWindow_Closing(object sender, CancelEventArgs e)
         {
             UnHook(); // Unhook on window close
-            EnableWindow(hwndButton, true);
+            FunctionsImplementations.EnableWindow(hwndButton, true);
         }
     }
 }
