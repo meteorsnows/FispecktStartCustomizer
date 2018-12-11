@@ -25,7 +25,7 @@ namespace FispecktStartCustomizer
         private static FunctionsImplementations.HookProc mouseProc = mouseCallback;
 
         private static Win32Point curPos = new Win32Point();
-        private static Rect buttonRect = new Rect();
+        private static FunctionsImplementations.Rect buttonRect = new FunctionsImplementations.Rect();
 
         private const int WH_MOUSE_LL = 14;
 
@@ -116,38 +116,27 @@ namespace FispecktStartCustomizer
             FunctionsImplementations.UnhookWindowsHookEx(keyHookId);
         }
 
-        //Import some functions for start menu tooltip 
-        [DllImport("user32.dll")]
-        private static extern IntPtr FindWindow(string ClassName, string WindowName);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string className, string windowName);
-
-        [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
-        public struct Rect
-        {
-            public int Left { get; set; }
-            public int Top { get; set; }
-            public int Right { get; set; }
-            public int Bottom { get; set; }
-        }
-
         public MainWindow()
         {
+            StartMenu startMenu = new StartMenu();
+            startMenu.Show();
+            FunctionsImplementations.Size s = new FunctionsImplementations.Size();
+            s.height = 2;
+            s.width = 2;
+            startMenu.AddButton("C:\\d.png", "fff", s, 0, 0);
         }
        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IntPtr TaskBar = FindWindow("Shell_TrayWnd", null); // Connect to taskbar
+            IntPtr TaskBar = FunctionsImplementations.FindWindow("Shell_TrayWnd", null); // Connect to taskbar
             if (TaskBar != (IntPtr)0)
             {
-                hwndButton = FindWindowEx(TaskBar, IntPtr.Zero, "Start", null); // Connect to start menu tooltip
+                hwndButton = FunctionsImplementations.FindWindowEx(TaskBar, IntPtr.Zero, "Start", null); // Connect to start menu tooltip
                 if (hwndButton != (IntPtr)0)
                 {
                     FunctionsImplementations.EnableWindow(hwndButton, false);
-                    GetWindowRect(hwndButton, ref buttonRect);
+                    FunctionsImplementations.GetWindowRect(hwndButton, ref buttonRect);
                     Hook();
                 }
                 else
