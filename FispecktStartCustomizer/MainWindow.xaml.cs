@@ -209,7 +209,7 @@ namespace FispecktStartCustomizer
         private void AcrylicWindow_Closing(object sender, CancelEventArgs e)
         {
             UnHook(); // Unhook on window close
-            EnableWindow(hwnd)
+            EnableWindow(hwndButton, true);
         }
     }
 }
