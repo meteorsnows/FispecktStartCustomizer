@@ -126,7 +126,7 @@ namespace FispecktStartCustomizer
             s.height = 100;
             s.width = 100;
             Thickness t = new Thickness();
-
+            new SettingsMenu().Show();
             startMenu.AddButton(null /* iconpath */ , null /* exe path */, s, new Thickness(0, 0, 0, 0));
         }
         private void Button_Click(object sender, RoutedEventArgs e)
