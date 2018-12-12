@@ -28,6 +28,10 @@ namespace FispecktStartCustomizer
             {
                 b.Content = new BitmapImage(new Uri(imageSrc));
             }
+            else
+            {
+                MessageBox.Show("No button icon, using default", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             b.Width = size.width;
             b.Height = size.height;
            
@@ -48,7 +52,7 @@ namespace FispecktStartCustomizer
             }
             else
             {
-                MessageBox.Show("No such file", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("File not specified!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
