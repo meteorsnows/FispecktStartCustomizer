@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,14 @@ namespace FispecktStartCustomizer
         {
             Button b = new Button();
             b.Style = Application.Current.Resources["ButtonRevealStyle"] as Style;
-            b.Content = new BitmapImage(new Uri(imageSrc));
+            if (imageSrc != null)
+            {
+                b.Content = new BitmapImage(new Uri(imageSrc));
+            }
+            b.Width = size.width;
+            b.Height = size.height;
+           
+            b.Tag = path; // Throwing path into button properties for shortcut
             b.AddHandler(Button.ClickEvent, new RoutedEventHandler(b_Click));
             grid.Children.Add(b);
 
@@ -31,6 +39,17 @@ namespace FispecktStartCustomizer
 
         private void b_Click(object sender, RoutedEventArgs e)
         {
+            String path = (String)((Button)e.Source).Tag;
+            if (path != null)
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = path;
+                p.Start();
+            }
+            else
+            {
+                MessageBox.Show("No such file", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public StartMenu()

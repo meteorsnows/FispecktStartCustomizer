@@ -121,13 +121,14 @@ namespace FispecktStartCustomizer
             StartMenu startMenu = new StartMenu();
             startMenu.Show();
             FunctionsImplementations.Size s = new FunctionsImplementations.Size();
-            s.height = 2;
-            s.width = 2;
-            startMenu.AddButton("C:\\d.png", "fff", s, 0, 0);
+            s.height = 100;
+            s.width = 100;
+            startMenu.AddButton(null /* iconpath */ , null /* exe path */, s, 0, 0);
         }
 
         private void ReadPolicy(object sender, RoutedEventArgs e)
         {
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="300" Closing="AcrylicWindow_Closing">
     <Grid fw:PointerTracker.Enabled="True" Background="#70000000">
-        <Button Content="Start handler" HorizontalAlignment="Left" Margin="22,21,0,142" Width="243"
+        <Button Content="Start handler" HorizontalAlignment="Left" Height = "59" Margin="22,10,0,153" Width="243"
                 Style="{StaticResource ButtonRevealStyle}" Click="Button_Click"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="22,141,0,0" VerticalAlignment="Top" Width="243" Height="105" Click="ReadPolicy"/>
 
