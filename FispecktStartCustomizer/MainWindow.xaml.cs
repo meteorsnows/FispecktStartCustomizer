@@ -125,8 +125,10 @@ namespace FispecktStartCustomizer
             s.width = 2;
             startMenu.AddButton("C:\\d.png", "fff", s, 0, 0);
         }
-       
 
+        private void ReadPolicy(object sender, RoutedEventArgs e)
+        {
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             IntPtr TaskBar = FunctionsImplementations.FindWindow("Shell_TrayWnd", null); // Connect to taskbar
