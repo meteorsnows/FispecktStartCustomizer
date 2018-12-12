@@ -22,6 +22,9 @@ namespace FispecktStartCustomizer
 
         private static IntPtr mHookId = IntPtr.Zero;
 
+        private StartMenu startMenu = new StartMenu(new Thickness(0, 5, 10, 20));
+        
+
         private static FunctionsImplementations.HookProc mouseProc = mouseCallback;
 
         private static Win32Point curPos = new Win32Point();
@@ -118,17 +121,13 @@ namespace FispecktStartCustomizer
 
         public MainWindow()
         {
-            StartMenu startMenu = new StartMenu();
             startMenu.Show();
             FunctionsImplementations.Size s = new FunctionsImplementations.Size();
             s.height = 100;
             s.width = 100;
-            startMenu.AddButton(null /* iconpath */ , null /* exe path */, s, 0, 0);
-        }
+            Thickness t = new Thickness();
 
-        private void ReadPolicy(object sender, RoutedEventArgs e)
-        {
-
+            startMenu.AddButton(null /* iconpath */ , null /* exe path */, s, new Thickness(0, 0, 0, 0));
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -157,6 +156,14 @@ namespace FispecktStartCustomizer
         {
             UnHook(); // Unhook on window close
             FunctionsImplementations.EnableWindow(hwndButton, true);
+        }
+
+        private void CreateButton(object sender, RoutedEventArgs e)
+        {
+            FunctionsImplementations.Size s = new FunctionsImplementations.Size();
+            s.height = 100;
+            s.width = 100;
+            startMenu.AddButton(null /* iconpath */ , null /* exe path */, s, new Thickness(0, 0, 0, 0));
         }
     }
 }

@@ -20,8 +20,10 @@ namespace FispecktStartCustomizer
     /// </summary>
     public partial class StartMenu
     {
-        public void AddButton(String imageSrc, String path, FunctionsImplementations.Size size, int x, int y)
+        public Thickness defaultMargin;
+        public void AddButton(String imageSrc, String path, FunctionsImplementations.Size size, Thickness margin)
         {
+            Console.WriteLine(defaultMargin);
             Button b = new Button();
             b.Style = Application.Current.Resources["ButtonRevealStyle"] as Style;
             if (imageSrc != null)
@@ -34,7 +36,7 @@ namespace FispecktStartCustomizer
             }
             b.Width = size.width;
             b.Height = size.height;
-           
+            b.Margin = FunctionsImplementations.addMargin(margin, defaultMargin);
             b.Tag = path; // Throwing path into button properties for shortcut
             b.AddHandler(Button.ClickEvent, new RoutedEventHandler(b_Click));
             grid.Children.Add(b);
@@ -46,9 +48,15 @@ namespace FispecktStartCustomizer
             String path = (String)((Button)e.Source).Tag;
             if (path != null)
             {
-                Process p = new Process();
-                p.StartInfo.FileName = path;
-                p.Start();
+                try
+                {
+                    Process p = new Process();
+                    p.StartInfo.FileName = path;
+                    p.Start();
+                } catch (System.ComponentModel.Win32Exception err)
+                {
+                    MessageBox.Show(err.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
@@ -56,8 +64,9 @@ namespace FispecktStartCustomizer
             }
         }
 
-        public StartMenu()
+        public StartMenu(Thickness defaultMargin)
         {
+            this.defaultMargin = defaultMargin;
             InitializeComponent();
         }
     }

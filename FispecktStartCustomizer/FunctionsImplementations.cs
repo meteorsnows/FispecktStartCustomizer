@@ -51,8 +51,20 @@ namespace FispecktStartCustomizer
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool EnableWindow(IntPtr hWnd, bool bEnable);
 
+        //Adding margins
+
+        public static Thickness addMargin(Thickness firstMargin, Thickness secondMargin)
+        {
+            Thickness t = new Thickness();
+            t.Bottom = firstMargin.Bottom + secondMargin.Bottom;
+            t.Left = firstMargin.Left + secondMargin.Left;
+            t.Right = firstMargin.Right + secondMargin.Right;
+            t.Top = firstMargin.Top + secondMargin.Top;
+            return t;
+        }
         //Functions for start menu tooltip
 
+        
         public struct Rect
         {
             public int Left { get; set; }
