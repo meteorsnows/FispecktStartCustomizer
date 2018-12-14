@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FispecktStartCustomizer"
         mc:Ignorable="d"
-        Title="SettingsMenu" Height="93.75" Width="596.428">
+        Title="SettingsMenu" Height="525.405" Width="905.702" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="AddProgram" Content="Добавить программу" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="282" Height="46" Click="AddProgram_Click"/>
-        <Button x:Name="Autorun" Content="Добавить/убрать из автозагрузки" HorizontalAlignment="Left" Margin="308,7,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="Autorun_Click"/>
+        <Button x:Name="AddProgram" Content="Add executable" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="282" Height="46" Click="AddProgram_Click"/>
+        <Button x:Name="Autorun" Content="Add/Remove from startup" HorizontalAlignment="Left" Margin="308,7,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="Autorun_Click"/>
+        <Button x:Name="ResetConfig" Content="Reset config" HorizontalAlignment="Left" Margin="598,7,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="ResetConfig_Click"/>
+        <ListBox x:Name="sss" HorizontalAlignment="Left" Height="384" Margin="10,76,0,0" VerticalAlignment="Top" Width="858" SelectionChanged="ListBox_SelectionChanged"/>
 
     </Grid>
 </Window>

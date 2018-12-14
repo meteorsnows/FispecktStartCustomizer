@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,26 +21,41 @@ namespace FispecktStartCustomizer
     /// </summary>
     public partial class SettingsMenu : Window
     {
+        RWIni configFile = FunctionsImplementations.GetConfigFile();
         public SettingsMenu()
         {
             InitializeComponent();
-
-            /*******************************************************************Read config file***************************************************/
-
-            String configFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\StartCustomizer\\Config.ini";
-            Console.WriteLine(configFilePath);
-            var configFile = new RWIni(configFilePath);
-            configFile.Write("TestKey", "TestValue", "TestSection");
         }
 
         private void AddProgram_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog ofd = new OpenFileDialog();
+            
+            if (ofd.ShowDialog() == true)
+            {
+                sss.Items.Add(ofd.FileName);
+            }
         }
 
         private void Autorun_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: AUTORUN FUNCTION
+        }
 
+        private void ResetConfig_Click(object sender, RoutedEventArgs e)
+        {
+            configFile.DeleteSection("Config");
+            MessageBox.Show("Config resetted sucessfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.WriteLine(sss.SelectedItem);
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FispecktStartCustomizer
 {
-    class RWIni
+    public class RWIni
     {
         String Path;
 

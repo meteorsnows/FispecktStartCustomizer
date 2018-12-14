@@ -36,7 +36,7 @@ namespace FispecktStartCustomizer
             }
             b.Width = size.width;
             b.Height = size.height;
-            b.Margin = FunctionsImplementations.addMargin(margin, defaultMargin);
+            b.Margin = FunctionsImplementations.AddMargin(margin, defaultMargin);
             b.Tag = path; // Throwing path into button properties for shortcut
             b.AddHandler(Button.ClickEvent, new RoutedEventHandler(b_Click));
             grid.Children.Add(b);

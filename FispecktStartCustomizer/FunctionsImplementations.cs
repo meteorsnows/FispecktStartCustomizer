@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -53,7 +54,7 @@ namespace FispecktStartCustomizer
 
         //Adding margins
 
-        public static Thickness addMargin(Thickness firstMargin, Thickness secondMargin)
+        public static Thickness AddMargin(Thickness firstMargin, Thickness secondMargin)
         {
             Thickness t = new Thickness();
             t.Bottom = firstMargin.Bottom + secondMargin.Bottom;
@@ -81,5 +82,24 @@ namespace FispecktStartCustomizer
 
         [DllImport("user32.dll")]
         public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
+
+
+
+        //Config file loading
+
+        /*******************************************************************Read config file***************************************************/
+        public static RWIni GetConfigFile()
+        {
+            String saveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\StartCustomizer\\";
+            if (!Directory.Exists(saveDirectory)) Directory.CreateDirectory(saveDirectory);
+            String configFilePath = saveDirectory + "Config.ini";
+            if (!File.Exists(configFilePath))
+            {
+                File.Create(configFilePath);
+                MessageBox.Show("Config file not found, created new one!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            Console.WriteLine(configFilePath);
+            return new RWIni(configFilePath);
+        }
     }
 }
