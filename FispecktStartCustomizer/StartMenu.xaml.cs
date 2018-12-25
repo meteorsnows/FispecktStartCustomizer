@@ -20,6 +20,7 @@ namespace FispecktStartCustomizer
     /// </summary>
     public partial class StartMenu
     {
+        public Boolean editingMode = false;
         public Thickness defaultMargin;
         public void AddButton(String imageSrc, String path, FunctionsImplementations.Size size, Thickness margin)
         {
@@ -43,6 +44,7 @@ namespace FispecktStartCustomizer
 
         }
 
+        
 
         private void b_Click(object sender, RoutedEventArgs e)
         {

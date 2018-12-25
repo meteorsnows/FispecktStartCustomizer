@@ -1,4 +1,6 @@
-﻿<Window x:Class="FispecktStartCustomizer.SettingsMenu"
+﻿<fw:AcrylicWindow
+    xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+   x:Class="FispecktStartCustomizer.SettingsMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,11 +8,14 @@
         xmlns:local="clr-namespace:FispecktStartCustomizer"
         mc:Ignorable="d"
         Title="SettingsMenu" Height="525.405" Width="905.702" ResizeMode="NoResize">
-    <Grid>
-        <Button x:Name="AddProgram" Content="Add executable" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="282" Height="46" Click="AddProgram_Click"/>
-        <Button x:Name="Autorun" Content="Add/Remove from startup" HorizontalAlignment="Left" Margin="308,7,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="Autorun_Click"/>
-        <Button x:Name="ResetConfig" Content="Reset config" HorizontalAlignment="Left" Margin="598,7,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="ResetConfig_Click"/>
-        <ListBox x:Name="sss" HorizontalAlignment="Left" Height="384" Margin="10,76,0,0" VerticalAlignment="Top" Width="858" SelectionChanged="ListBox_SelectionChanged"/>
+    <Grid fw:PointerTracker.Enabled="True">
+        <Button Style="{StaticResource ButtonRevealStyle}" x:Name="AddProgram" Content="Add executable" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="AddProgram_Click"/>
+        <Button Style="{StaticResource ButtonRevealStyle}" x:Name="Autorun" Content="Add/Remove from startup" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="Autorun_Click"/>
+        <Button Style="{StaticResource ButtonRevealStyle}" x:Name="ResetConfig" Content="Reset config" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="270" Height="46" Click="ResetConfig_Click"/>
+        <ListBox Style="{StaticResource ListBoxRevealStyle}" x:Name="AppList" HorizontalAlignment="Left" Height="476" Margin="294,10,0,0" VerticalAlignment="Top" Width="596" SelectionChanged="ListBox_SelectionChanged"/>
+        <Button Style="{StaticResource ButtonRevealStyle}" Content="Change Name" HorizontalAlignment="Left" Height="45" Margin="10,189,0,0" VerticalAlignment="Top" Width="270" Click="Button_Click"/>
+        <TextBox Style="{StaticResource TextBoxRevealStyle}" x:Name="NameBox" HorizontalAlignment="Left" Height="25" Margin="10,461,0,0" TextWrapping="Wrap" Text="Shortcut name" VerticalAlignment="Top" Width="270"/>
+        <Button Style="{StaticResource ButtonRevealStyle}" x:Name="toggleEdit" Content="Toggle editing mode" HorizontalAlignment="Left" Margin="10,248,0,0" VerticalAlignment="Top" Width="270" Height="45" Click="ToggleEdit_Click"/>
 
     </Grid>
-</Window>
+</fw:AcrylicWindow>

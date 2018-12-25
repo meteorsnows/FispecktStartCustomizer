@@ -88,18 +88,6 @@ namespace FispecktStartCustomizer
         //Config file loading
 
         /*******************************************************************Read config file***************************************************/
-        public static RWIni GetConfigFile()
-        {
-            String saveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\StartCustomizer\\";
-            if (!Directory.Exists(saveDirectory)) Directory.CreateDirectory(saveDirectory);
-            String configFilePath = saveDirectory + "Config.ini";
-            if (!File.Exists(configFilePath))
-            {
-                File.Create(configFilePath);
-                MessageBox.Show("Config file not found, created new one!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            Console.WriteLine(configFilePath);
-            return new RWIni(configFilePath);
-        }
+       
     }
 }

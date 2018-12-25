@@ -35,8 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentWPF, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentWPF.0.5.0\lib\net45\FluentWPF.dll</HintPath>
+    <Reference Include="FluentWPF, Version=0.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentWPF.0.6.1\lib\net45\FluentWPF.dll</HintPath>
+    </Reference>
+    <Reference Include="MadMilkman.Ini, Version=1.0.6.0, Culture=neutral, PublicKeyToken=4e0b5157a7ffbb74, processorArchitecture=MSIL">
+      <HintPath>..\packages\MadMilkman.Ini.1.0.6.0\lib\net20\MadMilkman.Ini.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -59,7 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FunctionsImplementations.cs" />
-    <Compile Include="RWIni.cs" />
+    <Compile Include="Hooks.cs" />
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>

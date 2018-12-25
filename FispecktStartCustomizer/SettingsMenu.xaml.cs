@@ -19,9 +19,9 @@ namespace FispecktStartCustomizer
     /// <summary>
     /// Логика взаимодействия для SettingsMenu.xaml
     /// </summary>
-    public partial class SettingsMenu : Window
+    public partial class SettingsMenu
     {
-        RWIni configFile = FunctionsImplementations.GetConfigFile();
+        
         public SettingsMenu()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace FispecktStartCustomizer
             
             if (ofd.ShowDialog() == true)
             {
-                sss.Items.Add(ofd.FileName);
+                AppList.Items.Add(ofd.FileName);
             }
         }
 
@@ -44,7 +44,7 @@ namespace FispecktStartCustomizer
 
         private void ResetConfig_Click(object sender, RoutedEventArgs e)
         {
-            configFile.DeleteSection("Config");
+            
             MessageBox.Show("Config resetted sucessfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -55,7 +55,23 @@ namespace FispecktStartCustomizer
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine(sss.SelectedItem);
+            NameBox.Text = (String)AppList.SelectedItem;
+            Console.WriteLine(AppList.SelectedItem);
         }
+
+        private void ToggleEdit_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppList.SelectedItem != null)
+            {
+
+                AppList.Items.Add(NameBox.Text);
+                AppList.Items.Remove(AppList.SelectedItem);
+            }
+        }
+
     }
 }
